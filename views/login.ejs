@@ -1,0 +1,67 @@
+<%- include('header') %>
+
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        <h3 class="mb-5">Connectez-vous</h3>
+                        <form action="/login" method="POST">
+                            <div class="alert alert-danger" id="email_Error" role="alert" style="display: none;"></div>
+                            <div class="form-outline mb-4">
+                                <input type="text" name="email" id="email" placeholder="Email" class="form-control form-control-lg" />
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input type="password" name="pwd" id="pwd" placeholder="Mot de passe" class="form-control form-control-lg" />
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                Se connecter</button>
+                        </form>
+                            <hr class="my-4">
+                            <a href="/register" class="btn btn-secondary">S'inscrire</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const form = document.querySelector('form');
+    const emailError = document.querySelector('#email_Error');
+    const pwdError = document.querySelector('#pwd_Error');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        //Supprimé les erreurs
+        emailError.style.display = "none";
+        emailError.textContent = '';
+
+        const email = form.email.value
+        const pwd = form.pwd.value
+
+        try {
+            const res = await fetch('/login', {
+                method: 'POST',
+                body: JSON.stringify({ email, pwd }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            const data = await res.json();
+            if(data.errors){
+                emailError.textContent = data.errors.email || data.errors.pwd;
+                emailError.style.display = "block";
+            }
+            if(data.user){
+                location.assign('/');
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    })
+</script>
+
+<%- include('footer') %> 
+    

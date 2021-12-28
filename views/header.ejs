@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <title>API securisé</title>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary">
+        <a href="/" class="navbar-brand">API-SECURE</a>
+        <div class="form-inline">
+            <% if(locals.user) { %> 
+                <div class="mr-sm-2"><p style="color: aliceblue;">Bienvenue, <%= user.email %></p></div>
+                <a href="/logout" class="btn btn-danger mr-sm-2">Se deconnecter</a>
+            <% } else { %>
+                <a href="/login" class="btn btn-outline-light mr-sm-2">Se connecter</a>
+                <a href="/register" class="btn btn-outline-light my-2 my-sm-0">S'inscrire</a>  
+        </div>
+            <% } %> 
+    </nav>

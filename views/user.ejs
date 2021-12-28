@@ -1,0 +1,14 @@
+<%- include('header') %> 
+
+<div class="container mt-2">
+    <h1 class="mb-4">Utilisateurs inscrit sur le site</h1>
+    <% users.forEach(user => { %> 
+    <div class="card mt-4">
+        <div class="card-body">
+            <h4 class="card-title"><%= user.email %> </h4>
+        </div>
+    </div>
+    <% }) %> 
+</div>
+
+<%- include('footer') %>
