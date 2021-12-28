@@ -15,10 +15,7 @@ module.exports.register_post = async (req, res) => {
     const { email, pwd } = req.body;
     try {
         const user = await User.create({ email, pwd });
-        const token = createToken(user._id);
-        //res.cookie('auth', token, { httpOnly: true, maxAge: 24* 60* 60});
-        
-        res.status(200).send({ user: user._id, token });
+        res.status(200).send({ user: user._id});
     } catch (error) {
         const errors = handlErrors(error);
         res.status(400).json({ errors });

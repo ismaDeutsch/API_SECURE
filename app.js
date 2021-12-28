@@ -2,9 +2,11 @@ const expresse = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes/routes');
 const cookieParser = require('cookie-parser');
-const { auth, checkUser } = require('./middleware/auth');
+const { checkUser } = require('./middleware/auth');
 
 const app = expresse();
+
+const PORT = 8080
 
 //MIDDLEWARE
 app.use(expresse.json());
@@ -24,4 +26,4 @@ app.get('*', checkUser);
 app.get('/', (req, res) => res.render('home'));
 app.use(routes);
 
-app.listen(8000);
+app.listen(PORT, () => {console.log(`Server running on http://localhost:${PORT}`)});

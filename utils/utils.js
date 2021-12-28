@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 
+//GESTION D'ERREURS
 module.exports.handlErrors = (err) => {
     let errors = { email: '', pwd: '' };
 
@@ -30,6 +31,7 @@ module.exports.handlErrors = (err) => {
     return errors;
 }
 
+//Création du token avec JWT
 module.exports.createToken = (id) => {
     return jwt.sign({ id }, 'SECRET_KEY', {
         expiresIn: '24h'

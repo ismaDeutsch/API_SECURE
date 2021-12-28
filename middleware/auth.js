@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
+//Vérifier si un token existe
 const auth = (req, res, next) => {
     if(req.cookies.auth){
         jwt.verify(req.cookies.auth, 'SECRET_KEY', (error, decodedToken) => {
@@ -17,6 +18,7 @@ const auth = (req, res, next) => {
     }
 }
 
+//Verifier qui est l'utilisateur actuel
 const checkUser = (req, res, next) => {
     if(req.cookies.auth){
         jwt.verify(req.cookies.auth, 'SECRET_KEY', async (error, decodedToken) => {
