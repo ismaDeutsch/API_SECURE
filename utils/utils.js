@@ -20,12 +20,12 @@ module.exports.handlErrors = (err) => {
     //Login erreur
     //Utilisateur inéxistant
     if(err.message === 'user error'){
-        errors.email = 'L\'adresse e-mail ou l\'identifiant et/ou le mot de passe saisis sont incorrects.';
+        errors.email = 'L\'adresse e-mail et/ou le mot de passe saisis sont incorrects.';
     }
     
     //Mot de passe incorrecte
     if(err.message === 'pwd error'){
-        errors.pwd = 'L\'adresse e-mail ou l\'identifiant et/ou le mot de passe saisis sont incorrects.';
+        errors.pwd = 'L\'adresse e-mail et/ou le mot de passe saisis sont incorrects.';
     } 
 
     return errors;
