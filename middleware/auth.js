@@ -39,4 +39,20 @@ const checkUser = (req, res, next) => {
     }
 }
 
-module.exports = { auth, checkUser };
+//Si l'utilisateur est connecté alors les login et register ne sont pas accessible
+const userRedirect = (req, res, next) => {
+    if(req.cookies.auth){
+        jwt.verify(req.cookies.auth, 'SECRET_KEY', async (error, decodedToken) => {
+            if(error) {
+                next();
+            } else {
+                //console.log(decodedToken)
+                res.redirect('/');
+            }
+        })
+    } else
+        next();
+}
+
+
+module.exports = { auth, checkUser, userRedirect };
